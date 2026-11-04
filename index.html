@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>PROYECTO PÁGINA | Mapa Corrientes V2.4</title><link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/><style>
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/><title>PROYECTO PÁGINA | Mapa Corrientes V2.5</title><link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet"/><style>
 :root{font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:#192c43;background:#eef2f7}*{box-sizing:border-box}body{margin:0}header{background:#14243d;color:white;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px}h1{font-size:20px;margin:3px 0 0}h2{font-size:18px;margin:0 0 10px}.brand{color:#d7ba7e;font-size:11px;font-weight:750;letter-spacing:.12em}.pill{border-radius:25px;padding:5px 9px;background:#294563;font-size:11px;color:#f8dfaa}.layout{display:grid;grid-template-columns:255px minmax(0,1fr);min-height:calc(100vh - 72px)}aside{background:#fff;border-right:1px solid #dae3eb;padding:16px}nav button{display:block;text-align:left;width:100%;border:0;background:transparent;border-radius:10px;padding:12px 10px;font-size:14px;color:#324359;margin:3px 0}nav button.active{background:#e6eef9;color:#164775;font-weight:750}main{padding:20px;min-width:0}.panel{background:white;border:1px solid #dce3eb;border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 1px 3px #2530470a}.tiny{font-size:12px;color:#69798a;line-height:1.5}.buttons{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:9px;background:#173d66;color:#fff;padding:11px 13px;font-weight:650;font-size:13px;cursor:pointer}.btn.alt{background:#eaf0f7;color:#173d66}.btn:disabled{opacity:.5}.mapwrap{position:relative}#map{height:min(62vh,640px);min-height:370px;border-radius:12px;z-index:1}.floating{position:absolute;z-index:500;left:10px;top:12px;display:flex;flex-direction:column;gap:6px;max-width:80%}.floating label{background:#fff;border-radius:9px;padding:8px 12px;font-size:12px;box-shadow:0 2px 8px #0002}.columns{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}.field label{font-size:12px;font-weight:650}.field input,.field textarea,.field select{padding:10px;border-radius:9px;border:1px solid #cad5e1;background:white;width:100%;font:inherit;font-size:14px}.status{background:#f1f5f9;padding:12px;border-radius:10px;font-size:13px;min-height:40px}.hidden{display:none!important}a{color:#145484}.tag{display:inline-block;border-radius:7px;background:#eef2fa;padding:4px 8px;font-size:11px}.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.tile{background:#f1f5f9;border-radius:10px;padding:13px}.tile b{display:block;font-size:20px}.entry{padding:10px;border:1px solid #dde5ee;margin:7px 0;border-radius:9px;cursor:pointer}#file{max-width:100%}.leaflet-container{font-family:inherit}@media(max-width:800px){.layout{display:block}aside{padding:8px;overflow:auto;border-bottom:1px solid #dae3eb}nav{display:flex;gap:4px;min-width:max-content}nav button{width:auto;margin:0;padding:10px 11px;font-size:12px}main{padding:12px}.columns{grid-template-columns:1fr}.tiles{grid-template-columns:1fr 1fr}#map{height:52vh;min-height:340px}header{padding:12px}}
-</style></head><body><header><div><div class="brand">PROYECTO PÁGINA</div><h1>Mapa inmobiliario de Corrientes</h1></div><span class="pill">PILOTO V2.4</span></header><div class="layout"><aside><nav><button id="volverPantalla" type="button">← Volver</button><button class="active" data-go="mapa">🗺️ Mapa</button><button data-go="sectores">📐 Sectores</button><button data-go="fichas">📋 Fichas</button><button data-go="info">ℹ️ Información</button><button id="abrirTasaciones" type="button">🏠 Tasaciones</button></nav></aside><main>
+</style></head><body><header><div><div class="brand">PROYECTO PÁGINA</div><h1>Mapa inmobiliario de Corrientes</h1></div><span class="pill">PILOTO V2.5</span></header><div class="layout"><aside><nav><button id="volverPantalla" type="button">← Volver</button><button class="active" data-go="mapa">🗺️ Mapa</button><button data-go="sectores">📐 Sectores</button><button data-go="fichas">📋 Fichas</button><button data-go="info">ℹ️ Información</button><button id="abrirTasaciones" type="button">🏠 Tasaciones</button></nav></aside><main>
 <section id="tab-mapa"><div id="volverTasacionV23" style="display:none;position:fixed;bottom:88px;left:12px;right:12px;z-index:10000;background:white;padding:10px;border-radius:14px;box-shadow:0 3px 20px #14243d66;border:1px solid #d6e1ee"><button type="button" id="confirmarPuntoV23" class="btn" style="width:100%;font-size:16px">✓ Confirmar ubicación y seguir tasación</button><p id="avisoPuntoV23" class="tiny" style="margin:5px 0 0">Podés arrastrar el marcador para corregirlo antes de confirmar.</p></div><div class="panel"><h2>Buscar inmueble por dirección</h2><p class="tiny">Buscá una dirección de Corrientes Capital, por ejemplo Jujuy 865. El resultado es una ubicación orientativa: <b>no delimita el lote ni certifica la numeración.</b></p><div class="field"><label for="buscarDireccion">Calle y altura</label><input autocomplete="street-address" id="buscarDireccion" placeholder="Jujuy 865"/></div><div class="buttons"><button class="btn" id="irDireccion">Buscar dirección</button><button class="btn alt" id="puntoManual">Marcar punto en el mapa</button><button class="btn alt" id="borrarPunto">Quitar marcador</button></div><p aria-live="polite" class="status" id="estadoDireccion">Seleccioná una dirección o un punto para empezar.</p><div class="panel" id="fichaUbicacion" style="display:none;padding:12px;background:#f2f6fa"><strong id="tituloUbicacion">Inmueble seleccionado</strong><p class="tiny" id="detalleUbicacion"></p><p class="tiny">El punto se puede mover arrastrando el marcador. El círculo indica 500 m en línea recta; no son distancias de recorrido.</p><button class="btn alt" id="mostrarRadio">Mostrar/ocultar radio de 500 m</button></div></div><div class="panel"><h2>Mapa sectorizado</h2><p class="tiny">Mapa de calles real (OpenStreetMap). Activá capas, seleccioná un barrio oficial cuando importes su archivo o dibujá una zona de valoración propia.</p><div class="buttons"><button class="btn" id="draw">+ Dibujar sector</button><button class="btn alt" disabled="" id="finish">Terminar polígono</button><button class="btn alt" id="cancel">Cancelar</button><button class="btn alt" id="radius">Radio 500 m</button></div><p class="tiny" id="instructions">Tocá una zona para consultar su ficha. Para dibujar un sector, pulsá «Dibujar sector» y marcá sus vértices en el mapa.</p></div><div class="panel"><h2>🧩 Parcelas y manzanas (V1.1)</h2><p class="tiny">Cargá un archivo GeoJSON oficial de parcelas o manzanas para ver sus límites reales. Esta función no genera lotes ficticios. La descarga de datos catastrales y sus permisos se gestionan con el organismo fuente.</p><div class="field"><label for="archivoCatastro">Archivo catastral GeoJSON</label><input accept=".geojson,.json,application/geo+json,application/json" id="archivoCatastro" type="file"/></div><div class="buttons"><button class="btn alt" id="limpiarCatastro">Quitar capa catastral</button><a href="https://catalogogis.ciudaddecorrientes.gov.ar/gis/planificacion_urbana/" rel="noopener" style="align-self:center" target="_blank">Abrir visor municipal ↗</a></div><label><input checked="" id="mostrarCatastro" type="checkbox"/> Mostrar límites catastrales</label><p class="status" id="estadoCatastro">Sin archivo catastral cargado.</p><div class="panel" id="datosParcela" style="display:none;padding:12px;background:#f2f6fa"><strong>Parcela seleccionada</strong><div class="tiny" id="camposParcela" style="margin-top:7px;overflow-wrap:anywhere"></div><p class="tiny">Datos informativos extraídos del GeoJSON, sujetos a verificación catastral.</p></div></div><div class="mapwrap"><div id="map"></div><div class="panel" id="leyendaPanel"><h3>Colores y barrios</h3><p class="tiny">Seleccioná un nombre para abrir su ficha. Los colores distinguen barrios, no representan niveles de precios.</p><div id="leyenda" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:7px;max-height:230px;overflow:auto"></div></div><div class="floating"><label><input checked="" id="officialToggle" type="checkbox"/> Barrios oficiales</label><label><input checked="" id="sectorToggle" type="checkbox"/> Sectores de valoración</label></div></div><p class="tiny">© <a href="https://www.openstreetmap.org/copyright" rel="noopener" target="_blank">OpenStreetMap contributors</a>. La cartografía base requiere internet. Los sectores propios NO son límites oficiales.</p></section>
 <section class="hidden" id="tab-sectores"><div class="panel"><h2>Importar y consultar barrios oficiales</h2><p class="tiny">Descargá el CSV de barrios desde el <a href="https://datos.ciudaddecorrientes.gov.ar/dataset/barrios/archivo/a3b229c5-08d8-4ca4-908e-d72b63eb295f" rel="noopener" target="_blank">Portal de Datos Abiertos municipal</a> y seleccionalo aquí. Se admiten GeoJSON, JSON o CSV que incluya geometrías GeoJSON.</p><div class="field"><label for="file">Archivo de barrios (.csv / .geojson / .json)</label><input accept=".csv,.json,.geojson,text/csv,application/json" id="file" type="file"/></div><div class="field"><label for="buscarBarrio">Buscar barrio importado</label><input autocomplete="off" id="buscarBarrio" placeholder="Escribí el nombre de un barrio"/></div><div id="barriosEncontrados"></div><p class="tiny">Los 140 polígonos ya están precargados. También podés importar un archivo actualizado.</p><button class="btn alt" id="clearOfficial">Restablecer barrios oficiales</button><p class="status" id="importStatus">Barrios municipales incorporados a la versión 0.8.</p></div><div class="panel"><h2>Sectores de valoración propios</h2><p class="tiny">Dibujá polígonos desde el mapa; después elegí la zona y completá su ficha. Los datos se guardan solo en este navegador de prueba.</p><div id="sectorList"></div><button class="btn alt" id="export">Exportar sectores (GeoJSON)</button></div></section>
 <section class="hidden" id="tab-fichas"><div class="panel"><h2>Ficha inmobiliaria del sector</h2><p class="tiny">Seleccioná un barrio o sector desde el mapa para asociar notas y referencias. Las cifras que ingreses son datos manuales, NO indicadores verificados.</p><div class="field" id="colorField"><label>Color de este barrio o sector</label><input id="zoneColor" style="height:46px;padding:3px" type="color" value="#4A8DB7"/></div><p class="status" id="selected">Todavía no seleccionaste ninguna zona.</p>
@@ -16,7 +16,7 @@
 <p class="tiny">Si modificaste la ficha sin guardarla, te avisaremos antes de cambiar de barrio.</p>
 </div><div class="field"><label>Nombre o código del sector</label><input id="name" placeholder="Ej.: Sector Centro A"/></div><div class="field"><label>Tipo de propiedad</label><select id="type"><option>Casa</option><option>Terreno</option><option>Departamento</option><option>Local comercial</option></select></div><div class="field"><label>Precio de referencia USD/m² (opcional, manual)</label><input id="price" min="0" placeholder="Sin datos verificados" type="number"/></div><div class="field"><label>Origen del dato</label><select id="source"><option value="">Sin verificar</option><option>Oferta publicada</option><option>Operación verificada</option><option>Estimación profesional</option></select></div><div class="field"><label>Observaciones técnicas</label><textarea id="notes" placeholder="Servicios, accesibilidad, restricciones, estado del mercado..." rows="4"></textarea></div><div class="buttons"><button class="btn" id="save">Guardar ficha</button><button class="btn alt" id="delete">Eliminar sector propio</button></div><p class="status" id="saveStatus">El precio queda vacío hasta contar con una fuente documentada.</p></div></section>
 <section class="hidden" id="tab-info"><div class="panel"><h2>Qué contiene esta primera versión</h2><div class="tiles"><div class="tile"><b>01</b><small>Mapa de calles</small></div><div class="tile"><b>02</b><small>Barrios importables</small></div><div class="tile"><b>03</b><small>Sectores editables</small></div></div><p>Demo V1.2: 140 polígonos municipales precargados, colores por barrio, leyenda y fichas guardadas en el dispositivo. Esta es una demostración móvil sin servidor. Aún faltan cuentas de matriculados, membresías, base de datos compartida, precios reales, informe PDF, lugares de interés y publicación en dominio propio.</p><p class="tiny">Importante: el círculo de 500 m mide distancia geográfica aproximada alrededor del punto elegido, no distancia por calles ni un cálculo automático de incidencia en valor.</p></div></section>
-<section class="hidden" id="tab-tasaciones"><div class="panel"><h2>🏢 Perfil profesional e inmobiliaria — demo V2.4</h2>
+<section class="hidden" id="tab-tasaciones"><div class="panel"><h2>🏢 Perfil profesional e inmobiliaria — demo V2.5</h2>
 <p class="tiny">Solo para profesionales matriculados. Este demo NO verifica matrículas ni pertenencia a inmobiliarias; no habilita acceso profesional real. Usá nombres y logos de prueba o propios, nunca de terceros sin autorización.</p>
 <div class="columns"><div>
 <div class="field"><label for="perfilNombre">Nombre del profesional</label><input id="perfilNombre" placeholder="Profesional de demostración" autocomplete="off"></div>
@@ -28,17 +28,24 @@
 <div class="field"><label for="perfilContacto">Contacto profesional (opcional)</label><input id="perfilContacto" placeholder="Correo o teléfono de prueba"></div>
 <div class="field"><label for="perfilLogo">Logo propio o de prueba (solo sesión, no guardado)</label><input type="file" id="perfilLogo" accept="image/png,image/jpeg,image/webp"><p class="tiny">No se sube al repositorio ni se guarda en el navegador; elegilo nuevamente para cada sesión.</p></div>
 </div></div><div class="buttons"><button class="btn alt" id="perfilGuardar">Guardar perfil de prueba en este navegador</button><button class="btn alt" id="perfilBorrar">Borrar perfil</button></div>
-<p id="perfilEstado" class="status">Seleccioná un profesional y una inmobiliaria para el encabezado del informe.</p></div><div class="panel"><h2>🏠 Tasación de inmueble — demo V2.4</h2><p class="tiny">Carga manual del profesional. No consulta GeoSIT ni verifica titularidad, ADREMA, superficie o valor de mercado. Para pruebas usá información ficticia, no datos personales ni documentos de clientes.</p>
-<div class="panel" style="background:#f1f6fb;padding:14px;margin:12px 0"><h3>📍 Ubicación, barrio y entorno (V2.4)</h3>
+<p id="perfilEstado" class="status">Seleccioná un profesional y una inmobiliaria para el encabezado del informe.</p></div><div class="panel"><h2>🏠 Tasación de inmueble — demo V2.5</h2><p class="tiny">Carga manual del profesional. No consulta GeoSIT ni verifica titularidad, ADREMA, superficie o valor de mercado. Para pruebas usá información ficticia, no datos personales ni documentos de clientes.</p>
+<div class="panel" style="background:#f1f6fb;padding:14px;margin:12px 0"><h3>📍 Ubicación, barrio y entorno (V2.5)</h3>
 <p class="tiny">El barrio se calcula con los polígonos del mapa. No equivale a zonificación normativa. Los lugares cercanos se consultan a OpenStreetMap, pueden estar incompletos y requieren tu selección.</p>
 <div class="buttons"><button class="btn alt" type="button" id="tasBuscarEnMapa">Buscar esta dirección en el mapa</button><button class="btn alt" type="button" id="tasActualizarZona">Tomar punto y detectar barrio</button><button class="btn alt" type="button" id="tasConsultarEntorno">Consultar lugares en 500 m</button></div>
 <p class="status" id="tasEstadoMapa">Primero buscá una dirección o marcá un punto en el mapa.</p>
-<div class="panel" style="padding:12px"><h3>Mapa del entorno — 500 m (V2.4)</h3><div id="tasMapaEntornoV19" style="height:340px;max-height:55vh;border-radius:10px;background:#e7edf2"></div>
+<div class="panel" style="padding:12px"><h3>Mapa del entorno — 500 m (V2.5)</h3><div id="tasMapaEntornoV19" style="height:340px;max-height:55vh;border-radius:10px;background:#e7edf2"></div>
 <p class="tiny" id="tasEstadoTeselasV21" role="status">El mapa aparecerá después de confirmar la ubicación del inmueble.</p>
 <div class="buttons">
 <button class="btn alt" type="button" id="tasReintentarMapaV21">Actualizar mapa</button>
 <a class="btn alt" id="tasAbrirOSMV21" href="https://www.openstreetmap.org" target="_blank" rel="noopener noreferrer">Ver zona en OpenStreetMap ↗</a>
-</div><p class="tiny" id="tasLeyendaV19">Marcá una dirección y consultá establecimientos para verlos en el mapa. Únicamente se incluirán los ubicados a 500 m o menos del punto.</p></div><div id="tasListaLugares"></div><p class="tiny">Seleccioná los lugares que querés incluir y verificá personalmente su vigencia.</p>
+</div><p class="tiny" id="tasLeyendaV19">Marcá una dirección y consultá establecimientos para verlos en el mapa. Únicamente se incluirán los ubicados a 500 m o menos del punto.</p></div><div class="panel" style="padding:12px;background:#f0f5fa">
+<strong>Consulta rápida y datos guardados</strong>
+<p class="tiny">Si ya consultaste esta misma ubicación, recuperamos los lugares guardados en este Safari. Si los servicios están caídos, podés cargar un GeoJSON de puntos de interés obtenido de una fuente autorizada. No subir datos personales.</p>
+<label for="tasImportPoisV25">Importar GeoJSON de lugares (opcional)</label>
+<input type="file" accept=".geojson,.json,application/geo+json,application/json" id="tasImportPoisV25" />
+<p class="tiny" id="tasImportStatusV25">Ningún archivo importado.</p>
+</div>
+<div id="tasListaLugares"></div><p class="tiny">Seleccioná los lugares que querés incluir y verificá personalmente su vigencia.</p>
 <button class="btn alt" type="button" id="tasAgregarLugares">Incorporar seleccionados al informe</button>
 </div>
 <div class="buttons"><button class="btn alt" id="tomarUbicacion">Usar ubicación del marcador</button><button class="btn alt" id="nuevaTasacion">Nueva ficha</button></div><p class="status" id="estadoTasacion">Completá los datos y guardá un borrador. El perfil no es verificación de matrícula.</p>
@@ -69,7 +76,7 @@
 <div class="buttons"><button class="btn" id="refGuardar" type="button">Guardar referencia</button><button class="btn alt" id="refBorrar" type="button">Borrar referencia seleccionada</button></div>
 <div class="tiny" id="refStatus" aria-live="polite"></div><div id="refListado" class="tiny"></div>
 </details>
-<details class="panel" id="panelComparablesV18"><summary><strong>Comparables de mercado (V2.4)</strong> — registrar inmuebles de referencia</summary>
+<details class="panel" id="panelComparablesV18"><summary><strong>Comparables de mercado (V2.5)</strong> — registrar inmuebles de referencia</summary>
 <p class="tiny">Cargá solamente datos públicos permitidos o ejemplos ficticios. Los precios de publicación no equivalen a operaciones cerradas. Todo queda en este navegador; no se sube a GitHub.</p>
 <div class="field"><label for="compBarrio">Barrio del comparable</label><input id="compBarrio" placeholder="Ej. Centro" list="barriosV16"/></div>
 <div class="field"><label for="compSector">Sector (opcional)</label><input id="compSector" placeholder="Sector de referencia"/></div>
@@ -209,13 +216,13 @@ function status(message){$('estadoTasacion').textContent=message;}
 function draw(){const root=$('listaTasaciones');root.replaceChildren();if(!list.length){root.textContent='Todavía no guardaste borradores.';return;}
 list.forEach(item=>{const wrap=document.createElement('div');wrap.className='entry';const title=document.createElement('strong');title.textContent=(item.data.tasDireccion||'Sin dirección')+' · '+item.id;wrap.append(title);const sub=document.createElement('p');sub.className='tiny';sub.textContent=item.data.tasTipo+' · '+(item.data.tasValor||'Sin valor')+' '+item.data.tasMoneda+' · '+(item.updated||'');wrap.append(sub);const open=document.createElement('button');open.className='btn alt';open.textContent='Abrir';open.onclick=()=>{currentId=item.id;fill(item.data);status('Borrador '+item.id+' abierto para editar.');window.scrollTo({top:0,behavior:'smooth'});};wrap.append(open);const del=document.createElement('button');del.className='btn alt';del.style.marginLeft='8px';del.textContent='Eliminar';del.onclick=()=>{if(!confirm('¿Eliminar este borrador de este navegador?'))return;list=list.filter(x=>x.id!==item.id);try{localStorage.setItem(storage,JSON.stringify(list));}catch(e){}if(currentId===item.id)currentId=null;draw();};wrap.append(del);root.append(wrap);});}
 $('nuevaTasacion').onclick=()=>{if(!confirm('¿Crear ficha nueva? Los cambios sin guardar se perderán.'))return;currentId=null;ids.forEach(id=>$(id).value='');$('tasFecha').value=new Date().toLocaleDateString('en-CA');status('Nueva ficha lista para completar.');};
-// Flujo V2.4: dirección -> marcador ajustable -> barrio cartográfico -> POI 500m -> informe.
+// Flujo V2.5: dirección -> marcador ajustable -> barrio cartográfico -> POI 500m -> informe.
 const pLocKey='pp_ubicacion_v09';let poiFound=[];let poiSelected=[];let geoCenter=null;
 let entornoMapV19=null,entornoLayerV19=null;
 const grupoV19=p=>/Escuela|Jardín|Universidad|Instituto/i.test(p.tipo)?'Educación':/Hospital|Clínica|Consultorio|Farmacia/i.test(p.tipo)?'Salud':/Comisaría/i.test(p.tipo)?'Seguridad':/Club|Centro deportivo|Cancha/i.test(p.tipo)?'Deporte':/Espacio verde|Plaza/i.test(p.tipo)?'Plazas y parques':'Comercios y servicios';
 const iconsV19={'Educación':'🏫','Salud':'🏥','Seguridad':'👮','Deporte':'⚽','Plazas y parques':'🌳','Comercios y servicios':'🏪'};
 
-// V2.4: se reutiliza el mapa Leaflet principal que ya muestra calles y barrios.
+// V2.5: se reutiliza el mapa Leaflet principal que ya muestra calles y barrios.
 let v23Layer=null, v23BaseParent=null, v23BaseNext=null;
 const originalMainMap=window.__ppMapaDemo;
 const mainMapElement=document.getElementById('map');
@@ -281,52 +288,107 @@ const kindLabel={school:'Escuela',kindergarten:'Jardín',university:'Universidad
 const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function renderPois(){const root=$('tasListaLugares');root.replaceChildren();if(!poiFound.length){root.textContent='No hay establecimientos para mostrar todavía.';refreshMapV19();return;}
 for(let i=0;i<poiFound.length;i++){const p=poiFound[i];const label=document.createElement('label');label.style.cssText='display:block;margin:8px 0;padding:9px;border:1px solid #dce5ed;border-radius:9px';const cb=document.createElement('input');cb.type='checkbox';cb.dataset.poi=String(i);cb.checked=true;label.append(cb,document.createTextNode(' '+p.tipo+': '+p.nombre+' · '+p.distancia+' m aprox.'));cb.addEventListener('change',refreshMapV19);root.append(label);}refreshMapV19();}
-// V2.4: consulta breve y verificable de datos OSM. El radio se filtra en el cliente.
-$('tasConsultarEntorno').onclick=async()=>{
+// V2.5: consulta breve y verificable de datos OSM. El radio se filtra en el cliente.
+// V2.5: caché local exacta + consulta ligera + entrada GeoJSON de puntos autorizados.
+const poiCacheKeyV25='pp_poi_cache_v25';
+function cacheLookupV25(loc){
+ try{
+  const entries=JSON.parse(localStorage.getItem(poiCacheKeyV25)||'{}');
+  const key=[loc.lat.toFixed(5),loc.lng.toFixed(5)].join(',');
+  return entries[key]||null;
+ }catch{return null;}
+}
+function cacheSaveV25(loc,items,source){
+ try{
+  const all=JSON.parse(localStorage.getItem(poiCacheKeyV25)||'{}');
+  const key=[loc.lat.toFixed(5),loc.lng.toFixed(5)].join(',');
+  all[key]={items:items.slice(0,250),at:new Date().toISOString(),source};
+  const keys=Object.keys(all).sort((a,b)=>String(all[b].at).localeCompare(String(all[a].at))).slice(0,16);
+  localStorage.setItem(poiCacheKeyV25,JSON.stringify(Object.fromEntries(keys.map(k=>[k,all[k]]))));
+ }catch(_){}
+}
+function distanceV25(lat,lng,x){
+ const toRad=Math.PI/180;
+ const dlat=(lat-x.lat)*toRad,dlng=(lng-x.lng)*toRad;
+ const a=Math.sin(dlat/2)**2+Math.cos(x.lat*toRad)*Math.cos(lat*toRad)*Math.sin(dlng/2)**2;
+ return Math.round(12742000*Math.asin(Math.min(1,Math.sqrt(a))));
+}
+function formatElementsV25(elements,x){
+ const seen=new Set();
+ return elements.map(z=>{
+  const lat=Number(z.lat??z.center?.lat),lng=Number(z.lon??z.center?.lon),tags=z.tags||{};
+  if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
+  const typ=tags.amenity||tags.shop||tags.leisure||tags.highway||tags.club||'otro';
+  const distance=distanceV25(lat,lng,x),id=String(z.type||'node')+'/'+String(z.id||lat+','+lng);
+  if(distance>500||seen.has(id))return null;
+  seen.add(id);
+  return {id,nombre:String(tags.name||kindLabel[typ]||typ),tipo:kindLabel[typ]||typ,distancia:distance,lat,lng};
+ }).filter(Boolean).sort((a,b)=>a.distancia-b.distancia).slice(0,250);
+}
+async function requestPoiV25(api,query){
+ const ctl=new AbortController();
+ const timeout=setTimeout(()=>ctl.abort(),11500);
+ try{
+  const res=await fetch(api.url,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:'data='+encodeURIComponent(query),signal:ctl.signal});
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  const j=await res.json();
+  if(!j||!Array.isArray(j.elements)||j.remark&&/error|timed out|memory/i.test(j.remark))throw new Error('Respuesta incompleta');
+  return {j,source:api.name};
+ }finally{clearTimeout(timeout);}
+}
+async function scanPoisV25(){
  const x=copyPoint();if(!x)return;
  const btn=$('tasConsultarEntorno');btn.disabled=true;
- poiFound=[];poiSelected=[];renderPois();
- const query=`[out:json][timeout:15];(nwr(around:500,${x.lat},${x.lng})[amenity~"^(school|kindergarten|university|college|hospital|clinic|doctors|pharmacy|police|restaurant|cafe|bank)$"];nwr(around:500,${x.lat},${x.lng})[leisure~"^(park|playground|sports_centre|pitch|stadium|sports_hall)$"];nwr(around:500,${x.lat},${x.lng})[shop];nwr(around:500,${x.lat},${x.lng})[club=sport];node(around:500,${x.lat},${x.lng})[highway=bus_stop];);out center;`;
+ const cached=cacheLookupV25(x);
+ if(cached&&Array.isArray(cached.items)){
+  poiFound=cached.items;poiSelected=[];renderPois();
+  mapStatus('Se recuperaron '+poiFound.length+' lugares guardados para esta ubicación ('+new Date(cached.at).toLocaleDateString('es-AR')+'). Podés seguir con el informe. Actualizando la consulta…');
+ }else{poiFound=[];poiSelected=[];renderPois();mapStatus('Buscando establecimientos en 500 metros…');}
+ // Consulta sin establecimientos genéricos, que producen respuestas masivas. Prioriza POI con nombre.
+ const query=`[out:json][timeout:10];(nwr(around:500,${x.lat},${x.lng})[amenity~"^(school|kindergarten|university|college|hospital|clinic|doctors|pharmacy|police|restaurant|cafe|bank)$"];nwr(around:500,${x.lat},${x.lng})[leisure~"^(park|playground|sports_centre|pitch|stadium|sports_hall)$"];nwr(around:500,${x.lat},${x.lng})[shop][name];nwr(around:500,${x.lat},${x.lng})[club=sport];);out center;`;
  const endpoints=[
+  {name:'Overpass principal',url:'https://overpass-api.de/api/interpreter'},
   {name:'Private.coffee',url:'https://overpass.private.coffee/api/interpreter'},
-  {name:'Overpass principal',url:'https://overpass-api.de/api/interpreter'}
+  {name:'Overpass Kumi',url:'https://overpass.kumi.systems/api/interpreter'}
  ];
- const problems=[];let j=null,source='';
  try{
-  for(const api of endpoints){
-   mapStatus('Buscando establecimientos en '+api.name+' (radio 500 m)…');
-   const controller=new AbortController();
-   const timeout=setTimeout(()=>controller.abort(),16000);
-   try{
-    const res=await fetch(api.url,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:'data='+encodeURIComponent(query),signal:controller.signal});
-    if(!res.ok)throw new Error('HTTP '+res.status);
-    const result=await res.json();
-    if(!result||!Array.isArray(result.elements))throw new Error('Respuesta sin lugares');
-    if(result.remark&&/error|timed out|memory/i.test(result.remark))throw new Error('Consulta incompleta: '+result.remark.slice(0,80));
-    j=result;source=api.name;break;
-   }catch(err){problems.push(api.name+': '+(err.name==='AbortError'?'tiempo agotado':String(err.message||err)));}
-   finally{clearTimeout(timeout);}
+  // Consulta los dos primeros en paralelo, evitando esperas secuenciales de 30+ segundos.
+  const results=await Promise.allSettled(endpoints.slice(0,2).map(api=>requestPoiV25(api,query)));
+  let successful=results.find(r=>r.status==='fulfilled');
+  if(!successful){
+   try{successful={status:'fulfilled',value:await requestPoiV25(endpoints[2],query)}}catch(err){
+    const errs=results.map((r,i)=>endpoints[i].name+': '+(r.reason?.name==='AbortError'?'sin respuesta':r.reason?.message||'error')).join('; ');
+    throw new Error(errs+'; alternativa: '+(err.name==='AbortError'?'sin respuesta':err.message));
+   }
   }
-  if(!j)throw new Error(problems.join(' / '));
-  const R=6371000,rad=Math.PI/180;
-  const seen=new Set();
-  poiFound=j.elements.map(z=>{
-    const lat=Number(z.lat??z.center?.lat),lng=Number(z.lon??z.center?.lon),tags=z.tags||{};
-    if(!Number.isFinite(lat)||!Number.isFinite(lng))return null;
-    const typ=tags.amenity||tags.shop||tags.leisure||tags.highway||tags.club||'otro';
-    const a=Math.sin((lat-x.lat)*rad/2)**2+Math.cos(x.lat*rad)*Math.cos(lat*rad)*Math.sin((lng-x.lng)*rad/2)**2;
-    const distance=Math.round(2*R*Math.asin(Math.min(1,Math.sqrt(a))));
-    const name=String(tags.name||kindLabel[typ]||typ);
-    const id=z.type+'/'+z.id;
-    if(seen.has(id)||distance>500)return null;
-    seen.add(id);
-    return {id,nombre:name,tipo:kindLabel[typ]||typ,distancia:distance,lat,lng};
-  }).filter(Boolean).sort((a,b)=>a.distancia-b.distancia);
-  renderPois();
-  mapStatus('Se encontraron '+poiFound.length+' establecimientos registrados en OpenStreetMap (consulta: '+source+'). Se muestran solo puntos a 500 m o menos. Revisá nombres y vigencia antes de incluirlos.');
- }catch(err){renderPois();mapStatus('No fue posible consultar establecimientos: '+err.message+'. El mapa y el radio siguen disponibles; podés volver a intentar. No se agregaron lugares inventados.');}
- finally{btn.disabled=false;}
-};
+  const {j,source}=successful.value;
+  poiFound=formatElementsV25(j.elements,x);poiSelected=[];renderPois();
+  cacheSaveV25(x,poiFound,source);
+  mapStatus('Encontrados '+poiFound.length+' establecimientos a 500 m o menos. Fuente: '+source+'. Guardados para futuras consultas en este Safari. Revisá los nombres antes de incorporar.');
+ }catch(err){
+  if(cached){mapStatus('Consulta externa no disponible. Se mantienen '+poiFound.length+' lugares guardados anteriormente; revisá su vigencia. '+err.message);}
+  else{mapStatus('No se recibieron establecimientos: '+err.message+'. El mapa sigue disponible. Para no frenar la tasación podés importar lugares GeoJSON de una fuente autorizada.');}
+ }finally{btn.disabled=false;}
+}
+$('tasConsultarEntorno').onclick=scanPoisV25;
+$('tasImportPoisV25').addEventListener('change',async ev=>{
+ const f=ev.target.files?.[0];if(!f)return;
+ const msg=$('tasImportStatusV25'),loc=copyPoint();if(!loc){msg.textContent='Primero confirmá la ubicación.';return;}
+ try{
+  if(f.size>6_000_000)throw new Error('Archivo mayor que 6 MB');
+  const j=JSON.parse(await f.text());
+  if(j.type!=='FeatureCollection'||!Array.isArray(j.features))throw new Error('Debe ser GeoJSON FeatureCollection');
+  const items=j.features.filter(feat=>feat.geometry?.type==='Point'&&Array.isArray(feat.geometry.coordinates)).map((feat,i)=>{
+   const [lng,lat]=feat.geometry.coordinates.map(Number);
+   const props=feat.properties||{};
+   return {type:'node',id:'archivo-'+i,lat,lon:lng,tags:{name:props.name||props.nombre||'',amenity:props.amenity,shop:props.shop,leisure:props.leisure,club:props.club}};
+  });
+  poiFound=formatElementsV25(items,loc);poiSelected=[];renderPois();
+  cacheSaveV25(loc,poiFound,'Archivo GeoJSON: '+f.name);
+  msg.textContent='Se importaron '+poiFound.length+' lugares dentro del radio desde '+f.name+'. Verificá procedencia, vigencia y categorías.';
+  mapStatus('Lugares importados: '+poiFound.length+'. Seleccioná los relevantes y tocá «Incorporar seleccionados al informe».');
+ }catch(err){msg.textContent='No se pudo importar: '+err.message;}
+});
 $('tasAgregarLugares').onclick=()=>{poiSelected=[...$('tasListaLugares').querySelectorAll('input[data-poi]:checked')].map(c=>poiFound[Number(c.dataset.poi)]).filter(Boolean);if(!poiSelected.length)return mapStatus('Seleccioná al menos un establecimiento de la lista.');const content='Establecimientos registrados en OpenStreetMap a 500 m o menos en línea recta (revisar vigencia):\n'+poiSelected.map(p=>'- '+p.tipo+': '+p.nombre+' ('+p.distancia+' m aprox.)').join('\n');$('tasEntorno').value=content;refreshMapV19();mapStatus('Se incorporaron '+poiSelected.length+' lugares a Entorno. Revisá y guardá la ficha.');};
 $('tomarUbicacion').onclick=()=>{try{const loc=JSON.parse(localStorage.getItem('pp_ubicacion_v09')||'null');if(!loc)throw Error();$('tasDireccion').value=loc.etiqueta||'';copyPoint();status('Ubicación orientativa copiada y barrio cartográfico consultado. Confirmá manualmente dirección y barrio.');}catch(e){status('Primero marcá una ubicación en el mapa.');}};
 $('guardarTasacion').onclick=()=>{const data=read();if(!data.tasDireccion.trim()){status('Indicá una dirección o referencia para identificar el borrador.');return;}if(!currentId)currentId='DEMO-'+Date.now().toString(36).toUpperCase();const item={id:currentId,updated:new Date().toLocaleString('es-AR'),data};list=list.filter(x=>x.id!==currentId);list.unshift(item);try{localStorage.setItem(storage,JSON.stringify(list));status('Borrador '+currentId+' guardado SOLO en este navegador.');draw();}catch(e){status('No se pudo guardar: el almacenamiento de Safari está lleno o bloqueado.');}};
@@ -387,7 +449,7 @@ $('imprimirTasacion').onclick=async()=>{
 };
 
 
-// V2.4 — prototipo local. Ningún valor por barrio se presupone ni se importa de GeoSIT.
+// V2.5 — prototipo local. Ningún valor por barrio se presupone ni se importa de GeoSIT.
 const refsKeyV16='pp_valores_referencia_v16';
 let refsV16=[];try{refsV16=JSON.parse(localStorage.getItem(refsKeyV16)||'[]');if(!Array.isArray(refsV16))refsV16=[];}catch{}
 const getEl=id=>document.getElementById(id);
@@ -455,7 +517,7 @@ setTimeout(refreshBarriosV16,500);
 getEl('imprimirTasacion').addEventListener('click',e=>{if(!calculateV16()){e.stopImmediatePropagation();alert('No se puede emitir todavía: revisá el detalle de datos pendientes en el módulo de valoración.');}},true);
 renderRefsV16();
 
-// V2.4 — Registro local de comparables. No se transmiten datos a servidores propios.
+// V2.5 — Registro local de comparables. No se transmiten datos a servidores propios.
 const compKeyV18='pp_comparables_v18';
 let compsV18=[];try{const saved=JSON.parse(localStorage.getItem(compKeyV18)||'[]');compsV18=Array.isArray(saved)?saved:[];}catch{}
 const compEl=id=>document.getElementById(id);
